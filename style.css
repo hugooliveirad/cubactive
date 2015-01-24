@@ -26,3 +26,16 @@
   opacity: 0.5;
   box-shadow: inset 0 0 0 1px rgba(134, 134, 134, 0.5);
 }
+
+.Credits {
+  position: fixed;
+  bottom: 10px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  color: white;
+}
+
+.Credits a {
+  color: inherit;
+}
