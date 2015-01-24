@@ -40,6 +40,16 @@ function makeSetState(stateName) {
 
 var Perspective = React.createClass({ displayName: 'Perspective',
 
+	propTypes: {
+		type: React.PropTypes.oneOf(['Mouse', 'Orientation'])
+	},
+
+	getInitialProps: function() {
+		return {
+			type: 'Mouse'
+		};
+	},
+
 	getInitialState: function() {
 		return {
 			perspective: [0, 0]
@@ -47,21 +57,11 @@ var Perspective = React.createClass({ displayName: 'Perspective',
 	},
 
 	componentWillMount: function() {
-		var mouseSource = Rx.Observable.fromEvent(document, 'mousemove');
-		var orientationSource = Rx.Observable.fromEvent(window, 'deviceorientation');
+		this['handle'+this.props.type]();
+	},
 
-		// get all mouse movements
-		mouseSource
-			// pick just the desired properties
-			.map(
-				curryRight(_.pick)('y')('x')
-			)
-			// transform into an array of the values
-			.map(_.values)
-			// get the cursor perspective
-			.map(getCursorPerspective)
-			// finally set state
-			.subscribe(_.bind(makeSetState('perspective'), this));
+	handleOrientation: function() {
+		var orientationSource = Rx.Observable.fromEvent(window, 'deviceorientation');
 
 		// get all orientation changes
 		orientationSource
@@ -73,6 +73,23 @@ var Perspective = React.createClass({ displayName: 'Perspective',
 			.map(_.values)
 			// get the cursor perspective
 			.map(getOrientationPerspective)
+			// finally set state
+			.subscribe(_.bind(makeSetState('perspective'), this));
+	},
+
+	handleMouse: function() {
+		var mouseSource = Rx.Observable.fromEvent(document, 'mousemove');
+
+		// get all mouse movements
+		mouseSource
+			// pick just the desired properties
+			.map(
+				curryRight(_.pick)('y')('x')
+			)
+			// transform into an array of the values
+			.map(_.values)
+			// get the cursor perspective
+			.map(getCursorPerspective)
 			// finally set state
 			.subscribe(_.bind(makeSetState('perspective'), this));
 	},

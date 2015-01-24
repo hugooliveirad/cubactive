@@ -8,9 +8,14 @@ var App = React.createClass({ displayName: 'App',
 	render: function() {
 		return (
 			React.createElement(Hero, null,
-				React.createElement(Perspective, null,
-					React.createElement(Cube, { size: 150 })
-				)
+				[
+					React.createElement(Perspective, { type: 'Mouse' },
+						React.createElement(Cube, { size: 200 })
+					),
+					React.createElement(Perspective, { type: 'Orientation' },
+						React.createElement(Cube, { size: 100 })
+					)
+				]
 			)
 		);
 	}
