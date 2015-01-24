@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "./node_modules/.bin/browserify App.js -o bundle.js --debug",
+    "build-prod": "./node_modules/.bin/browserify App.js | ./node_modules/.bin/uglifyjs -mc -v=0 > bundle.js",
     "watch": "./node_modules/.bin/watchify App.js -o bundle.js --debug"
   },
   "author": "Hugo Bessa <eu@hugobessa.com.br>",
@@ -21,6 +22,7 @@
   },
   "devDependencies": {
     "watchify": "^2.2.1",
-    "browserify": "^8.1.1"
+    "browserify": "^8.1.1",
+    "uglify-js": "^2.4.16"
   }
 }
