@@ -18,6 +18,18 @@ function getCursorPerspective(position) {
 	return [pX, pY];
 }
 
+function getOrientationPerspective(position) {
+	var b = position[0];
+	var g = position[1];
+	var max = 90;
+
+	// perspectives. -100 ~ 100. 0 is center
+	var pB = (b * 200 / max) - 100;
+	var pG = (g * 200 / max) - 100;
+
+	return [pG, pB];
+}
+
 function makeSetState(stateName) {
 	return function(value) {
 		var state = {};
@@ -36,8 +48,9 @@ var Perspective = React.createClass({ displayName: 'Perspective',
 
 	componentWillMount: function() {
 		var mouseSource = Rx.Observable.fromEvent(document, 'mousemove');
+		var orientationSource = Rx.Observable.fromEvent(window, 'deviceorientation');
 
-		// Get all mouse movements
+		// get all mouse movements
 		mouseSource
 			// pick just the desired properties
 			.map(
@@ -47,6 +60,19 @@ var Perspective = React.createClass({ displayName: 'Perspective',
 			.map(_.values)
 			// get the cursor perspective
 			.map(getCursorPerspective)
+			// finally set state
+			.subscribe(_.bind(makeSetState('perspective'), this));
+
+		// get all orientation changes
+		orientationSource
+			// pick just the desired properties
+			.map(
+				curryRight(_.pick)('gamma')('beta')
+			)
+			// transform into an array of the values
+			.map(_.values)
+			// get the cursor perspective
+			.map(getOrientationPerspective)
 			// finally set state
 			.subscribe(_.bind(makeSetState('perspective'), this));
 	},
