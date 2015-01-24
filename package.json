@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "./node_modules/.bin/browserify App.js -o bundle.js",
-    "watch": "./node_modules/.bin/watchify App.js -o bundle.js"
+    "build": "./node_modules/.bin/browserify App.js -o bundle.js --debug",
+    "watch": "./node_modules/.bin/watchify App.js -o bundle.js --debug"
   },
   "author": "Hugo Bessa <eu@hugobessa.com.br>",
   "license": "MIT",
@@ -15,7 +15,9 @@
     "rx": "^2.3.24",
     "rx-react": "^0.1.0",
     "react": "^0.12.2",
-    "react-prefixr": "^0.1.0"
+    "react-prefixr": "^0.1.0",
+    "curry-d": "^0.6.0",
+    "viewport-size": "0.0.1"
   },
   "devDependencies": {
     "watchify": "^2.2.1",

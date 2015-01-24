@@ -1,5 +1,6 @@
 var React = require('react');
 var Hero = require('./components/Hero');
+var Perspective = require('./components/Perspective');
 var Cube = require('./components/Cube');
 
 var App = React.createClass({ displayName: 'App',
@@ -7,7 +8,9 @@ var App = React.createClass({ displayName: 'App',
 	render: function() {
 		return (
 			React.createElement(Hero, null,
-				React.createElement(Cube, { size: 100 })
+				React.createElement(Perspective, null,
+					React.createElement(Cube, { size: 100 })
+				)
 			)
 		);
 	}

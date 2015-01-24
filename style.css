@@ -1,8 +1,9 @@
-.wrapper {
+.Perspective {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  -webkit-perspective: 1000px;
-          perspective: 1000px;
 }
 
 .Cube {

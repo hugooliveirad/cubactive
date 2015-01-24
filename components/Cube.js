@@ -54,16 +54,28 @@ var CubeFace = React.createClass({ displayName: 'CubeFace',
 var Cube = React.createClass({ displayName: 'Cube',
 
 	propTypes: {
-		size: React.PropTypes.number.isRequired
+		// size of each facet
+		size: React.PropTypes.number.isRequired,
+		// perspective of the cube
+		perspective: React.PropTypes.arrayOf(React.PropTypes.number)
+	},
+
+	getDefaultProps: function() {
+		return {
+			perspective: [-30, -30]
+		};
 	},
 
 	getStyle: function() {
 		var $size = this.props.size;
+		var $perspective = this.props.perspective;
 
 		var style = s({
 			width: this.props.size,
 			height: this.props.size,
-			transform: 'translateZ(-'+$size+'px) rotateY(-30deg) rotateX(-30deg)'
+			transform: 'translateZ(-'+$size+'px) '+
+					   'rotateY('+$perspective[0]+'deg) '+
+					   'rotateX('+$perspective[1]+'deg)'
 		});
 
 		return style;
