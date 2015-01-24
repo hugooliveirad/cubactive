@@ -1,0 +1,24 @@
+{
+  "name": "cubeactive",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "./node_modules/.bin/browserify App.js -o bundle.js",
+    "watch": "./node_modules/.bin/watchify App.js -o bundle.js"
+  },
+  "author": "Hugo Bessa <eu@hugobessa.com.br>",
+  "license": "MIT",
+  "dependencies": {
+    "lodash": "^2.4.1",
+    "rx": "^2.3.24",
+    "rx-react": "^0.1.0",
+    "react": "^0.12.2",
+    "react-prefixr": "^0.1.0"
+  },
+  "devDependencies": {
+    "watchify": "^2.2.1",
+    "browserify": "^8.1.1"
+  }
+}
