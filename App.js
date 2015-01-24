@@ -9,7 +9,7 @@ var App = React.createClass({ displayName: 'App',
 		return (
 			React.createElement(Hero, null,
 				React.createElement(Perspective, null,
-					React.createElement(Cube, { size: 100 })
+					React.createElement(Cube, { size: 150 })
 				)
 			)
 		);
