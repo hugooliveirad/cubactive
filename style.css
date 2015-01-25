@@ -20,6 +20,7 @@ html {
   top: 50%;
   -webkit-transform-style: preserve-3d;
           transform-style: preserve-3d;
+  will-change: transform;
 }
 
 .Cube-face {
