@@ -75,7 +75,7 @@ var Cube = React.createClass({ displayName: 'Cube',
 			height: this.props.size,
 			transform: 'translate3d(-50%, -50%, -'+$size+'px)'+
 					   'rotateY('+$perspective[0]+'deg) '+
-					   'rotateX('+$perspective[1]+'deg)'
+					   'rotateX('+$perspective[1]*-1+'deg)'
 		});
 
 		return style;
