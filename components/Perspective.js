@@ -84,7 +84,7 @@ var Perspective = React.createClass({ displayName: 'Perspective',
 		mouseSource
 			// pick just the desired properties
 			.map(
-				curryRight(_.pick)('pageX')('pageY')
+				curryRight(_.pick)('pageY')('pageX')
 			)
 			// transform into an array of the values
 			.map(_.values)
