@@ -81,23 +81,23 @@ var Perspective = React.createClass({ displayName: 'Perspective',
 		var mouseSource = Rx.Observable.fromEvent(document, 'mousemove');
 		var touchSource = Rx.Observable.fromEvent(window, 'touchmove');
 
-		var touchSource = touchSource
+		touchSource
 			// map touchSource to get just the first touch info
 			.map(function(evt) {
 				return _.first(evt.touches);
-			});
-
-		touchSource.merge(mouseSource)
-			// pick just the desired properties
-			.map(
-				curryRight(_.pick)('pageY')('pageX')
-			)
-			// transform into an array of the values
-			.map(_.values)
-			// get the cursor perspective
-			.map(getCursorPerspective)
-			// finally set state
-			.subscribe(_.bind(makeSetState('perspective'), this));
+			})
+			// merge sources to transform from both events
+			.merge(mouseSource)
+				// pick just the desired properties
+				.map(
+					curryRight(_.pick)('pageY')('pageX')
+				)
+				// transform into an array of the values
+				.map(_.values)
+				// get the cursor perspective
+				.map(getCursorPerspective)
+				// finally set state
+				.subscribe(_.bind(makeSetState('perspective'), this));
 	},
 
 	renderChild: function(child) {
