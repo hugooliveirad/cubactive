@@ -79,9 +79,15 @@ var Perspective = React.createClass({ displayName: 'Perspective',
 
 	handleMouse: function() {
 		var mouseSource = Rx.Observable.fromEvent(document, 'mousemove');
+		var touchSource = Rx.Observable.fromEvent(window, 'touchmove');
 
-		// get all mouse movements
-		mouseSource
+		var touchSource = touchSource
+			// map touchSource to get just the first touch info
+			.map(function(evt) {
+				return _.first(evt.touches);
+			});
+
+		touchSource.merge(mouseSource)
 			// pick just the desired properties
 			.map(
 				curryRight(_.pick)('pageY')('pageX')
